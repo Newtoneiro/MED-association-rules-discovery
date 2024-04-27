@@ -13,6 +13,13 @@ if __name__ == "__main__":
         default=None
     )
     optparser.add_option(
+        "-u",
+        "--UCIDataset",
+        dest="UCI",
+        help="fetch data from UCI repository",
+        default="car_evaluation"
+    )
+    optparser.add_option(
         "-s",
         "--minSupport",
         dest="minS",
@@ -30,17 +37,18 @@ if __name__ == "__main__":
     )
     (options, args) = optparser.parse_args()
 
-    inFile = None
-    if options.input is None:
-        inFile = sys.stdin
-    elif options.input is not None:
-        inFile = DataManager.get_data_from_file(options.input)
+    data_manager = DataManager()
+    if options.input is not None:
+        input = DataManager.get_data_from_file(options.input)
+    elif options.UCI is not None:
+        data_x, data_y = data_manager.fetch_data_from_UCI(options.UCI)
+        input = DataManager.combine_data(data_x, data_y)
     else:
-        print("No dataset filename specified, system with exit\n")
-        sys.exit("System will exit")
+        print("No dataset filename specified\n")
+        sys.exit(0)
 
     apriori = Apriori(options.minS, options.minC)
 
-    items, rules = apriori.run(inFile)
+    items, rules = apriori.run(input)
 
     AprioriUtils.print_results(items, rules)
