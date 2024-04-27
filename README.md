@@ -31,3 +31,16 @@ Eksperymenty należy przeprowadzić z wykorzystaniem publicznie dostępnych zbio
 - http://fimi.uantwerpen.be/data/,
 - https://github.com/deric/clustering-benchmark,
 - http://www.philippe-fournier-viger.com/spmf/index.php?link=datasets.php
+
+## Dokumentacja
+
+Dokumentacja powinna zawierać następujące rozdziały:
+
+1. Wprowadzenie i definicja problemu
+2. Charakterystyka proponowanego algorytmu/rozwiązania z odniesieniem do literatury
+3. Opis implementacji
+4. Instrukcja użytkownika (jak uruchomić/korzystać z implementacji)
+5. Charakterystyka wykorzystywanych zbiorów danych
+6. Wyniki eksperymentów pokazujących właściwości proponowanego rozwiązania
+7. Wnioski
+8. Bibliografia
