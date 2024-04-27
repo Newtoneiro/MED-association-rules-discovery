@@ -80,10 +80,8 @@ class AprioriUtils:
         confidence rules sorted by confidence.
         """
         print(f"\n {'-' * 25}< Supports >{'-' * 25}")
-        for item, support in sorted(items, key=lambda x: x[1]):
-            print(f"Item: {str(item):<40} | Support: {support:.3f}")
+        for item in sorted(items):
+            print(item)
         print(f"\n {'-' * 25}< Rules >{'-' * 25}")
-        for rule, confidence in sorted(rules, key=lambda x: x[1]):
-            pre, post = rule
-            rule = f"{str(pre)} ==> {str(post)}"
-            print(f"Rule: {rule:<40} | Confidence: {confidence:.3f}")
+        for rule in sorted(rules):
+            print(rule)

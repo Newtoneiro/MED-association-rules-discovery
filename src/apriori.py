@@ -1,4 +1,5 @@
 from src.apriori_utils import AprioriUtils
+from src.dataclasses import Rule, Item
 from collections import defaultdict
 from typing import Iterator
 
@@ -40,12 +41,11 @@ class Apriori:
         # Generate the rules
         items_output = []
         for value in total_set.values():
-            items_output.extend(
+            items_output.append(
                 [
-                    (
-                        tuple(item),
-                        # Support
-                        freq_set[item] / len(transaction_list)
+                    Item(
+                        item=tuple(item),
+                        support=freq_set[item] / len(transaction_list)
                     ) for item in value
                 ]
             )
@@ -65,7 +65,11 @@ class Apriori:
                         confidence = item_support / elem_support
                         if confidence >= self._min_confidence:
                             rules_output.append(
-                                ((tuple(elem), tuple(remain)), confidence)
+                                Rule(
+                                    pre=tuple(elem),
+                                    post=tuple(remain),
+                                    confidence=confidence
+                                )
                             )
 
         return items_output, rules_output
