@@ -1,42 +1,42 @@
 import sys
-from optparse import OptionParser
+from argparse import ArgumentParser
 from src import Apriori, DataManager, AprioriUtils, Metrics
 from itertools import tee
 
 
 if __name__ == "__main__":
-    optparser = OptionParser()
-    optparser.add_option(
+    optparser = ArgumentParser()
+    optparser.add_argument(
         "-f",
         "--inputFile",
         dest="input",
         help="filename containing csv",
         default=None
     )
-    optparser.add_option(
+    optparser.add_argument(
         "-u",
         "--UCIDataset",
         dest="UCI",
         help="fetch data from UCI repository",
         default="car_evaluation"
     )
-    optparser.add_option(
+    optparser.add_argument(
         "-s",
         "--minSupport",
         dest="minS",
         help="minimum support value",
         default=0.15,
-        type="float",
+        type=float
     )
-    optparser.add_option(
+    optparser.add_argument(
         "-c",
         "--minConfidence",
         dest="minC",
         help="minimum confidence value",
         default=0.6,
-        type="float",
+        type=float,
     )
-    (options, args) = optparser.parse_args()
+    options = optparser.parse_args()
 
     data_manager = DataManager()
     if options.input is not None:

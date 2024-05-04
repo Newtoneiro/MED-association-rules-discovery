@@ -46,7 +46,10 @@ class Metrics:
         """
         Get the Jaaccard of a rule.
         """
-        return rule.confidence / (self._get_support(rule.pre) + self._get_support(rule.post) - rule.confidence)
+        try:
+            return rule.confidence / (self._get_support(rule.pre) + self._get_support(rule.post) - rule.confidence)
+        except ZeroDivisionError:
+            return 0.0
 
     def _get_odds_ratio(self, rule: Rule) -> float:
         """
