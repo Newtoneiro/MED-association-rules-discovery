@@ -3,4 +3,5 @@
 from src.data_manager import DataManager
 from src.apriori import Apriori
 from src.apriori_utils import AprioriUtils
-from src.dataclasses import Rule, Item
+from src.dataclasses import Rule, Item, RuleMetrics
+from src.metrics import Metrics

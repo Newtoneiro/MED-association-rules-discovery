@@ -10,7 +10,10 @@ class Item:
     support: float
 
     def __str__(self):
-        return f"Item: {str(self.item):<40} | Support: {self.support:.3f}"
+        return f"Item: {str(tuple(self.item)):<30} | Support: {self.support:.3f}"
+    
+    def __repr__(self) -> str:
+        return str(self)
 
     def __eq__(self, other: "Item") -> bool:
         return self.support == other.support
@@ -27,11 +30,32 @@ class Rule:
     confidence: float
 
     def __str__(self):
-        rule = f"{str(self.pre)} ==> {str(self.post)}"
-        return f"{rule:<40} | Confidence: {self.confidence:.3f}"
+        rule = f"{str(tuple(self.pre))} ==> {str(tuple(self.post))}"
+        return f"{rule:<30} | Confidence: {self.confidence:.3f}"
+    
+    def __repr__(self) -> str:
+        return str(self)
 
     def __eq__(self, other: "Rule") -> bool:
         return self.confidence == other.confidence
 
     def __lt__(self, other: "Rule") -> bool:
         return self.confidence < other.confidence
+
+
+@dataclass
+class RuleMetrics:
+    rule: Rule
+    relative_support: float
+    lift_factor: float
+    certainty_factor: float
+    jaaccard: float
+    odds_ratio: float
+
+    def __str__(self):
+        return f"{self.rule} " + \
+            f"| rSup: {self.relative_support:.3f} " + \
+            f"| Lift: {self.lift_factor:.3f} " + \
+            f"| Certainty: {self.certainty_factor:.3f} " + \
+            f"| Jaccard: {self.jaaccard:.3f} " + \
+            f"| Odds Ratio: {self.odds_ratio:.3f}"

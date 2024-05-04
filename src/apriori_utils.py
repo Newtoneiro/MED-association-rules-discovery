@@ -3,6 +3,8 @@ from collections import defaultdict
 from itertools import chain, combinations
 from typing import Iterator, List, Tuple
 
+from src.dataclasses import RuleMetrics
+
 
 class AprioriUtils:
     """
@@ -23,7 +25,7 @@ class AprioriUtils:
             item_set: set,
             transaction_list: List,
             min_support: float,
-            freq_set: set
+            freq_set: set,
             ) -> set:
         """
         Calculate the support of itemsets in the itemSet and return a subset.
@@ -85,3 +87,12 @@ class AprioriUtils:
         print(f"\n {'-' * 25}< Rules >{'-' * 25}")
         for rule in sorted(rules):
             print(rule)
+
+    @staticmethod
+    def print_metrics(rules_metrics: List[RuleMetrics]) -> None:
+        """
+        Prints the metrics for the rules.
+        """
+        print(f"\n {'-' * 25}< Metrics >{'-' * 25}")
+        for rule_metric in rules_metrics:
+            print(rule_metric)

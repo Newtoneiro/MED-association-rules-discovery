@@ -41,10 +41,10 @@ class Apriori:
         # Generate the rules
         items_output = []
         for value in total_set.values():
-            items_output.append(
+            items_output.extend(
                 [
                     Item(
-                        item=tuple(item),
+                        item=(item),
                         support=freq_set[item] / len(transaction_list)
                     ) for item in value
                 ]
@@ -66,8 +66,8 @@ class Apriori:
                         if confidence >= self._min_confidence:
                             rules_output.append(
                                 Rule(
-                                    pre=tuple(elem),
-                                    post=tuple(remain),
+                                    pre=elem,
+                                    post=remain,
                                     confidence=confidence
                                 )
                             )

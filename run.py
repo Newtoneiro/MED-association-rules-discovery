@@ -1,6 +1,7 @@
 import sys
 from optparse import OptionParser
-from src import Apriori, DataManager, AprioriUtils
+from src import Apriori, DataManager, AprioriUtils, Metrics
+from itertools import tee
 
 
 if __name__ == "__main__":
@@ -49,6 +50,11 @@ if __name__ == "__main__":
 
     apriori = Apriori(options.minS, options.minC)
 
-    items, rules = apriori.run(input)
+    apriori_input, metrics_input = tee(input)
+
+    items, rules = apriori.run(apriori_input)
+    metrics = Metrics(metrics_input, items)
+    rules_metrics = metrics.get_metrics(rules)
 
     AprioriUtils.print_results(items, rules)
+    AprioriUtils.print_metrics(rules_metrics)
