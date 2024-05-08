@@ -41,7 +41,7 @@ def main(
         uci_dataset: str,
         min_support: float,
         min_confidence: float
-    ):
+        ):
     """
     Main function to run the Apriori algorithm.
 

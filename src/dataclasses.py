@@ -10,8 +10,8 @@ class Item:
     support: float
 
     def __str__(self):
-        return f"Item: {str(tuple(self.item)):<30} | Support: {self.support:.3f}"
-    
+        return f"Item: {str(tuple(self.item)):<40} | Supp: {self.support:.3f}"
+
     def __repr__(self) -> str:
         return str(self)
 
@@ -31,8 +31,8 @@ class Rule:
 
     def __str__(self):
         rule = f"{str(tuple(self.pre))} ==> {str(tuple(self.post))}"
-        return f"{rule:<30} | Confidence: {self.confidence:.3f}"
-    
+        return f"{rule:<40} | Confidence: {self.confidence:.3f}"
+
     def __repr__(self) -> str:
         return str(self)
 
@@ -53,9 +53,9 @@ class RuleMetrics:
     odds_ratio: float
 
     def __str__(self):
-        return f"{self.rule} " + \
-            f"| rSup: {self.relative_support:.3f} " + \
-            f"| Lift: {self.lift_factor:.3f} " + \
-            f"| Certainty: {self.certainty_factor:.3f} " + \
-            f"| Jaccard: {self.jaaccard:.3f} " + \
-            f"| Odds Ratio: {self.odds_ratio:.3f}"
+        return f"{str(self.rule)} " + \
+            f"| rSup: {self.relative_support:.2f} " + \
+            f"| Lift: {self.lift_factor:.2f} " + \
+            f"| Certainty: {self.certainty_factor:.2f} " + \
+            f"| Jaccard: {self.jaaccard:.2f} " + \
+            f"| Odds Ratio: {self.odds_ratio:.2f}"
