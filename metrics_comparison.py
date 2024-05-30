@@ -23,8 +23,9 @@ def format_grouped_metrics_average(
     """
     table = PrettyTable()
     table.field_names = [
-        "Lift Range", "No. Rules", "Avg. Relative Support",
-        "Avg. Certainty", "Avg. Jaccard", "Avg. Odds Ratio"
+        "Lift Range", "No. Rules", "Relative Support [Avg. / Variance]",
+        "Certainty [Avg. / Variance]", "Jaccard [Avg. / Variance]",
+        "Odds Ratio [Avg. / Variance]"
     ]
 
     for lift_range, metrics in sorted(
@@ -34,22 +35,42 @@ def format_grouped_metrics_average(
         avg_relative_support = sum(
             metric.relative_support for metric in metrics
         ) / len(metrics)
+        variance_relative_support = sum(
+            (metric.relative_support - avg_relative_support) ** 2
+            for metric in metrics
+        ) / len(metrics)
+
         avg_certainty = sum(
             metric.certainty_factor for metric in metrics
         ) / len(metrics)
+        variance_certainty = sum(
+            (metric.certainty_factor - avg_certainty) ** 2
+            for metric in metrics
+        ) / len(metrics)
+
         avg_jaccard = sum(
             metric.jaaccard for metric in metrics
         ) / len(metrics)
+        variance_jacaaard = sum(
+            (metric.jaaccard - avg_jaccard) ** 2
+            for metric in metrics
+        ) / len(metrics)
+
         avg_odds_ratio = sum(
             metric.odds_ratio for metric in metrics
         ) / len(metrics)
+        variance_odd_ratio = sum(
+            (metric.odds_ratio - avg_odds_ratio) ** 2
+            for metric in metrics
+        ) / len(metrics)
+
         table.add_row([
             lift_range,
             len(metrics),
-            f"{avg_relative_support:.2f}",
-            f"{avg_certainty:.2f}",
-            f"{avg_jaccard:.2f}",
-            f"{avg_odds_ratio:.2f}"
+            f"[{avg_relative_support:.3f} / {variance_relative_support:.3f}]",
+            f"[{avg_certainty:.3f} / {variance_certainty:.3f}]",
+            f"[{avg_jaccard:.3f} / {variance_jacaaard:.3f}]",
+            f"[{avg_odds_ratio:.3f} / {variance_odd_ratio:.3f}]"
         ])
 
     return table.get_string()
