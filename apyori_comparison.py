@@ -12,7 +12,6 @@ DATASETS = [
     "tic_tac_toe_endgame",
     "nursery"
 ]
-
 SUPPORTS = [0.15, 0.50, 0.8]
 CONFIDENCES = [0.15, 0.50, 0.8]
 

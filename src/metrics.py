@@ -22,7 +22,7 @@ class Metrics:
             )
         self._item_set = item_set
         self._transaction_list = transaction_list
-    
+
     # =========== Private methods =========== #
 
     def _get_support(self, item: frozenset) -> float:
@@ -30,18 +30,17 @@ class Metrics:
         Get the support of an item.
         """
         if item not in self._supports:
-            print(item)
             support = sum(1 for transaction in self._transaction_list if item.issubset(transaction))
             self._supports[item] = support / len(self._transaction_list)
 
         return self._supports[item]
-    
+
     def _get_lift_factor(self, rule: Rule) -> float:
         """
         Get the lift factor of a rule.
         """
         return rule.confidence / self._get_support(rule.post)
-    
+
     def _get_jaacard(self, rule: Rule) -> float:
         """
         Get the Jaaccard of a rule.

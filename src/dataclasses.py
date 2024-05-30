@@ -29,6 +29,9 @@ class Rule:
     post: frozenset
     confidence: float
 
+    def raw_str(self):
+        return f"{str(tuple(self.pre))} ==> {str(tuple(self.post))}"
+
     def __str__(self):
         rule = f"{str(tuple(self.pre))} ==> {str(tuple(self.post))}"
         return f"{rule:<40} | Confidence: {self.confidence:.3f}"
